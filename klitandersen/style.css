@@ -1,0 +1,2798 @@
+/*
+Theme Name: Klit Andersen
+Theme URI: https://eksempel.dk
+Author: FURD
+Author URI: https://eksempel.dk
+Description: Et speciallavet tema til Klit Andersen.
+Version: 1.0
+*/
+
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap'); /* Brødtekst */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap'); /* Fallback */
+
+/* ___________________________________________________________________________________________________________________________________________ */
+/* ANTI JEG-BLIVER-SUR-PROBLEMER */
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ___________________________________________________________________________________________________________________________________________ */
+
+/* ALL THEM BASICS */
+:root {
+    /* FARVER */
+    --color-red: #CA221A; /* Farven "Infosignal", beregnet for CTA's og highlights.*/
+    --color-black: #1A1C20; /* Farven "Carbon Core", beregnet for tekst, baggrund mm..*/
+    --color-white: #FFFFFF; /* Farven "Lysflade", beregnet for tekst, baggrund mm..*/
+    --color-grey01: #f7f7f7; /* Farven "Sky Grey", beregnet for baggrund segmenter. */
+    --color-grey02: #333333; /* Farven "Soft Black", blandet brug. */
+
+    /* FONTS */
+    --font-primary: 'Gotham Book', 'Inter', 'Helvetica Neue', Arial, sans-serif; /* Primær font, bruges headers og sub-headers. */
+    --font-secondary: 'Manrope', 'Roboto', 'Helvetica Neue', Arial, sans-serif; /* Sekundær font, bruges i brødtekster og footer. */
+
+    /* FONT STØRRELSER */
+    --font-size-small: 15px; /* Brødtekster. */
+    --font-size-medium: 25px; /* header, footer mm. */
+    --font-size-large: 40px; /* sub-headers = blogs mm .*/
+    --font-size-xlarge: 80px; /* Hero tekst + headers. */
+}
+
+/* FOLDER FONT IMPORT */
+    /*Headers og sub-headers*/
+    @font-face {
+        font-family: 'Gotham Book';
+        src: url('styles/fonts/Gotham-Book.woff2') format('woff2'),
+          url('styles/fonts/Gotham-Book.woff') format('woff');
+         font-weight: normal;
+         font-style: normal;
+         font-display: swap;
+     /*Convert side brugt: https://cloudconvert.com/otf-to-woff2*/
+  }
+
+
+/* ___________________________________________________________________________________________________________________________________________ */
+/* HEADER STYLES */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background-color 0.3s ease, padding 0.3s ease;
+  background-color: transparent;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.site-header.scrolled {
+  background-color: #2e2e2e;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* CONTAINER */
+.container {
+  margin: 0 auto;
+  padding-left: 75px;
+  padding-right: 75px;
+}
+
+/* HEADER INDHOLD */
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO */
+.logo img {
+  height: auto;
+  width: 150px;
+}
+
+/* MENU + GLOBE WRAPPER */
+.menu-language-group {
+  display: flex;
+  align-items: center;
+  gap: 35px; /* Ens afstand mellem items */
+}
+
+/* MENU STYLING */
+.main-menu {
+  display: flex;
+  gap: 35px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+}
+
+.main-menu a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--color-white);
+  text-decoration: none;
+  font-family: var(--font-secondary);
+  height: 40px;
+  line-height: 1;
+  transition: color 0.2s;
+  white-space: nowrap;
+}
+
+/* Hover underline effekt (standard links) */
+.main-menu a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.main-menu a:hover::after {
+  transform: scaleX(1);
+}
+
+/* CTA-knap (Contact) */
+.main-menu .button-contact > a {
+  background-color: var(--color-red);
+  color: var(--color-white);
+  border-radius: 10px;
+  text-transform: uppercase;
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  padding: 0 25px;
+  height: 40px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Fjern hover underline på Contact og tilføj mørkere hover-farve */
+.main-menu .button-contact > a::after {
+  display: none;
+}
+
+.main-menu .button-contact > a:hover {
+  background-color: #a71c16;
+  color: var(--color-white);
+}
+
+/* GLOBE AND DROP DOWN AREA */
+.language-switcher {
+  position: relative;
+}
+
+.lang-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.lang-toggle img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(100);
+}
+
+/* DROPDOWN */
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background: transparent;
+  z-index: 999;
+  min-width: 120px;
+  text-align: right;
+  padding: 10px;
+}
+
+.lang-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lang-dropdown li {
+  margin-bottom: 5px;
+  list-style: none;
+}
+
+.lang-dropdown li:last-child {
+  margin-bottom: 0;
+}
+
+.lang-dropdown a {
+  color: var(--color-white);
+  text-decoration: none;
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  transition: color 0.2s ease;
+}
+
+.lang-dropdown a:hover {
+  color: var(--color-red);
+}
+
+/* Aktivt sprog farvegiver */
+.lang-dropdown li.current-lang a {
+  color: var(--color-red);
+  font-weight: bold;
+}
+
+.lang-dropdown.visible {
+  display: block;
+}
+
+
+/* ___________________________________________________________________________________________________________________________________________ */
+/* FOOTER STYLES */
+.text-medium {
+  font-size: var(--font-size-medium);
+  font-family: var(--font-secondary);
+  margin-bottom: 0.5rem;
+  color: var(--color-white);
+}
+
+.text-small {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  color: var(--color-white);
+}
+
+.site-footer {
+  background: #2e2e2e;
+  color: #fff;
+  margin: 0 auto;
+  padding: 50px 75px;
+}
+
+/* Flex-container til logo placeringskaos */
+.footer-content {
+  display: flex;
+  align-items: flex-start; /* Sørger for at tekst starter ved samme højde som logo */
+  gap: 30px;
+  flex-wrap: wrap; /* Gør layoutet responsivt */
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.footer-spacer {
+  width: 450px;
+  flex-shrink: 0;
+}
+
+.footer-logo img {
+  height: auto; /* Behold proportioner på logo'et så det passewr med breden */
+  max-width: 250px;
+  display: block;
+  margin-bottom: 175px;
+}
+
+.footer-columns {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex: 1; /* Fylder resten af rækken */
+}
+
+.footer-column {
+  flex: 1;
+  width: 400px;
+}
+
+.footer-social-icons a {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.footer-social-icons img {
+  width: 30px;
+  height: auto;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.footer-social-icons img:hover {
+  opacity: 0.7;
+}
+
+.copyright-text {
+  opacity: 0.4;
+}
+
+.footer-column a {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+.footer-column a:hover {
+  color: var(--color-red);
+}
+
+
+/* ___________________________________________________________________________________________________________________________________________ */
+/* HERO SECTION HOME */
+
+.hero-section {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 900px;
+  position: relative;
+  color: var(--color-white);
+  font-family: var(--font-primary);
+}
+
+
+.hero-text-wrapper {
+  position: absolute;
+  top: 250px;
+  left: 75px;
+}
+
+.hero-title-box h1 {
+  font-size: var(--font-size-xlarge);
+  line-height: 1.1;
+  margin: 0 0 40px 0;
+  font-family: var(--font-primary);
+}
+
+.hero-subtext-box {
+  max-width: 740px;
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+  font-family: var(--font-secondary)
+}
+
+/* HOME OUR SERVICE SECTION */
+.home-service-section {
+  padding: 50px 75px;
+  background-color: var(--color-white);
+}
+
+.home-service-header h2 {
+  font-size: var(--font-size-xlarge);
+  font-family: var(--font-primary);
+  margin-bottom: 50px;
+  color: var(--color-black);
+}
+
+.home-service-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 kolonner maks fix*/
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+
+.service-card-item {
+  position: relative;
+  height: 300px;
+  width: 675px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  transition: transform 0.2s ease;
+}
+
+.service-card-item:hover {
+  transform: scale(1.02);
+}
+
+.home-card-overlay {
+  width: 100%;
+  padding: 20px;
+  border-radius: 0 0 12px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.home-card-title {
+  font-size: var(--font-size-medium);
+  font-family: var(--font-primary);
+  color: var(--color-white);
+  margin: 0;
+}
+
+.home-card-button {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+}
+
+/* HOME CLIENTS SECTION */
+/* CLIENTS SECTION */
+.clients-section {
+  background-color: var(--color-grey01);
+  padding: 5px 0;
+  border-bottom: 25px solid var(--color-red);
+}
+
+.clients-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 75px;
+}
+
+.clients-title {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xlarge);
+  color: var(--color-black);
+  margin-bottom: 75px;
+  text-align: left; 
+}
+
+.clients-logos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+  justify-items: center;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+.client-logo img {
+  max-width: 100%;
+  max-height: 120px; /* Større logoer */
+  object-fit: contain;
+  display: block;
+}
+
+
+/* Succes Story case område der forhåbenligt virker -  */
+.case-read-section {
+  background-color: var(--color-grey01);
+  padding-top: 50px;
+}
+
+.case-read-wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: 50px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 75px;
+}
+
+.case-read-image img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 8px;
+  display: block; 
+}
+
+.case-read-text {
+  flex: 1;
+  max-width: 600px;
+  margin: 0;
+  padding: 0;
+}
+
+.case-read-text h2 {
+  font-size: var(--font-size-large);
+  font-family: var(--font-primary);
+  margin: 0 0 20px 0; 
+  line-height: 1.1;
+}
+
+.case-read-text p {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  line-height: 1.6;
+  margin: 0 0 30px 0;
+  max-width: 600px;
+  word-break: break-word;
+}
+
+.case-read-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.case-read-arrow-text {
+  font-size: var(--font-size-small);
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.case-read-arrow-img {
+  width: 30px;
+  height: auto;
+}
+ 
+/* HOME BUTTON SECTION */
+.home-button-section {
+  background-color: var(--color-grey01);
+  padding: 40px 0;
+}
+
+.home-button-content {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start; 
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 75px;
+  gap: 20px;
+}
+
+.home-button-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  font-weight: 500;
+
+  /* Fjern link-styling */
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-button-link:visited,
+.home-button-link:hover,
+.home-button-link:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.home-button-text {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.home-button-image {
+  width: 30px;
+  height: auto;
+}
+
+
+
+/* ___________________________________________________________________________________________________________________________________________ */
+/* HERO SECTION BLOG */
+.blog-hero {
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Tekstcontainer – samme padding som headerens .container */
+.blog-hero-content {
+  position: absolute;
+  top: 275px; /* Titlen starter længere nede */
+  padding-left: 75px;
+}
+
+.blog-hero-content h1 {
+  font-size: var(--font-size-xlarge);
+  color: var(--color-white);
+  margin: 0 0 20px 0;
+  font-family: var(--font-primary);
+}
+
+.blog-hero-textbox {
+  width: 435px;
+  color: var(--color-white);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+}
+
+/* ___________________________________________________________________________________________________________________________________________ */
+/* CARD STYLING BLOG (GÆLDER FOR BÅDE BLOG OG CASES MENU PGA ENS OPBYGNING) */
+
+.cards-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 90%;
+  margin: 50px auto 0 auto;
+  padding-left: 75px;
+  padding-right: 75px;
+}
+
+.card {
+  display: flex;
+  background-color: #ECECEC;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 95%;
+  position: relative;
+}
+
+.card-image img {
+  width: 350px;
+  height: 160px;
+  border-radius: 4px;
+  margin-right: 2rem;
+}
+
+.card-content {
+  flex: 1;
+  min-width: 250px;
+}
+
+.card-title {
+  font-size: var(--font-size-xlarge);
+  margin-bottom:0.5rem;
+  font-family:var(--font-primary);
+}
+
+.card-text {
+  font-size: var(--font-size-small);
+  color:var(--color-black);
+  font-family:var(--font-secondary);
+}
+
+/* Det runde ikon-knap */
+.card-icon {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-red);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-icon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* ___________________________________________________________________________________________________________________________________________ */
+/* BLOG PAGE STYLES*/
+/* BLOG PAGE HERO STYLING */
+
+.blog-hero {
+  width: 100%;
+  height: 600px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+}
+
+.blog-hero-content {
+  padding-left: 200px;
+  padding-right: 20px;
+  width: 100%;
+  top: 250px; /* Titlen starter længere nede */
+}
+
+.blog-hero-content h1 {
+  font-size: var(--font-size-xlarge);
+  color: var(--color-white);
+  font-family: var(--font-primary);
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.blog-hero-textbox {
+  color: var(--color-white);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+  text-align: left;
+}
+
+
+/* ___________________________________________________________________________________________________________________________________________ */
+/* CONTACT PAGE STYLING */
+
+/* CONTACT HERO SECTION */
+
+.contact-hero {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0; /* bag alt */
+}
+
+.contact-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 175px 195px; /* Det den er rykker titlen */
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  z-index: 1;
+}
+
+
+.contact-hero-overlay h1 {
+  font-size: var(--font-size-xlarge);
+  font-family: var(--font-primary);
+  color: var(--color-white);
+  margin: 0;
+}
+
+
+/* CONTACT LAYOUT WRAPPER FIKS*/
+.contact-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* ← Gør at begge bokse starter samme sted */
+  gap: 25px;
+  margin-top: -105px;
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+}
+
+/* CF7 STYLING - WOUHU */
+.contact-form form {
+  display: grid;
+  grid-template-columns: repeat(2, 285px);
+  gap: 15px;
+}
+
+.contact-form form p {
+  margin: 0;
+}
+
+.contact-form .form-half {
+  height: 50px;
+}
+
+.contact-form .form-full {
+  grid-column: span 2;
+  height: 50px;
+}
+
+.contact-form textarea {
+  height: 380px !important;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  background-color: #ECECEC;
+  color: var(--secondary);
+  opacity: 1;
+  box-sizing: border-box;
+}
+
+.contact-form form p:last-of-type {
+  grid-column: span 2;
+  margin-top: 30px;
+}
+
+
+.contact-form input[type="submit"] {
+  grid-column: span 2;
+  width: 100px;
+  justify-self: start;
+  padding: 10px 20px;
+  background-color:var(--color-red);
+  color: var(--color-white);
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+
+.contact-form ::placeholder {
+  font-family: var(--font-secondary);
+  font-size: var(--small);
+  opacity: 1; /* gør boksen se-bar */
+}
+
+/* DEN RØDE INFORMATION BOKSA */
+
+.contact-info-box {
+  width: 420px;
+  height: 586px;
+  margin-top: 18px;
+  background-color: var(--color-red);
+  border-radius: 10px;
+  padding: 20px 40px 40px;
+  color: white;
+  font-family: var(--font-secondary);
+  display: flex;
+  align-items: flex-start; 
+}
+
+.contact-info-inner {
+  width: 100%;
+}
+
+.contact-info-inner h4 {
+  font-size: var(--font-size-medium);
+  font-family: var(--font-primary);
+  margin-bottom: 5px;
+}
+
+.contact-info-inner p {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  margin-bottom: 15px;
+}
+
+/* SPACER 1 */
+.contact-spacer-1 {
+  height: 50px;
+}
+
+/* SPACER 2 */
+.contact-spacer-2 {
+  height: 150px;
+}
+
+/* EMAIL LINK */
+.email-link {
+  color: white;
+  text-decoration: underline;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+}
+
+/* LINKEDIN KAOS */
+.linkedin-icon {
+  width: 30px;
+  height: auto;
+  display: inline-block;
+  margin-top: 10px;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+
+/* SPACER 3 */
+.contact-spacer-3 {
+  height: 75px;
+  width: 300px;
+}
+
+
+/* MAP KORT KAOS */
+.map-section {
+  width: 100%;
+  height: 700px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ______________________________________________________________________________________________________________________________________________________________ */
+/* SERVICE SECTION */
+
+/* Generel Reset */
+section {
+  padding: 0;
+  margin: 0 auto;
+}
+
+/* SERVICE HERO SECTION */
+.service-hero {
+  position: relative;
+  width: 100%;
+  height: 700px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0; /* læg bag andet */
+}
+
+.service-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 175px 75px;
+  z-index: 1;
+  color: var(--color-white);
+}
+
+.service-hero-overlay h1 {
+  font-size: var(--font-size-xlarge);
+  font-family: var(--font-primary);
+  margin: 0 0 20px;
+}
+
+.service-hero-overlay p {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0;
+}
+
+/* SERVICE HERO SECTION CARDS */
+.service-cards-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: -225px; /* HE HAS RAISED! */
+  padding: 0 50px;
+  position: relative;
+  z-index: 2;
+  flex-wrap: wrap;
+}
+
+.service-card {
+  width: 278px;
+  height: 375px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 30px 20px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  color: white;
+  text-decoration: none; 
+  transition: transform 0.3s ease; 
+}
+
+.service-card:hover {
+  transform: scale(1.03); /* fancy hover-effekt */
+}
+
+
+.service-card-title {
+  font-size: var(--font-size-medium);
+  font-family: var(--font-primary);
+  margin: 0;
+  z-index: 2;
+}
+
+.service-card-button {
+  width: 20px;
+  height: 20px;
+  margin-top: 30px;
+  object-fit: contain;
+  align-self: flex-start;
+  z-index: 2;
+}
+
+.service-spacer-1 {
+  height: 150px;
+}
+
+/* SERVICE - DIGITAL SIGNAGE SECTION */
+.digital-service-section {
+  background-color: #F7F7F7;
+  padding: 50px 0 75px;
+}
+
+.digital-service-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* ← VIGTIGT: top-align */
+  flex-wrap: wrap;
+  gap: 55px;
+  padding: 0 50px;
+}
+
+.digital-service-textarea {
+  max-width: 500px;
+  position: relative; /* ellers kan knappen ik være absolut */
+  padding-bottom: 55px; /* distance til knappen */
+}
+
+.digital-service-textarea h2 {
+  font-size: var(--font-size-xlarge);
+  font-family: var(--font-primary);
+  margin: 0 0 25px 0;
+  padding-top: 10px; /* justeres i forhold til billederne */
+}
+
+
+.digital-service-textarea p {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+  white-space: pre-line; 
+  margin-bottom: 30px;
+}
+
+.digital-service-images {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding-right: 50px; /* padding for tekst */
+}
+
+.digital-service-images img {
+  width: 600px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* Genbrug */
+.red-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: inline-block;
+  width: 150px;
+  height: 50px;
+  background-color: var(--color-red);
+  color: var(--color-white);
+  border-radius: 10px;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  transition: all 0.2s ease;
+}
+
+.red-button:hover {
+  background-color: #a61b14;
+  transform: scale(1.03);
+}
+
+/* SERVICE - EXTERNAL COMMUNICATION SECTION */
+.external-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 75px;
+  gap: 25px;
+  position: relative;
+}
+
+
+.external-image img {
+  width: 350px;
+  height: 650px;
+  padding-right: 50px; /* padding for tekst */
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.external-text {
+  position: relative;
+  height: 650px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+
+.external-text h2 {
+  font-size: var(--font-size-xlarge);
+  font-family: var(--font-primary);
+  margin-top: 0; /* ← denne sikrer, at den rammer toppen */
+  margin-bottom: 25px;
+}
+
+.external-text p {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+  white-space: pre-line;
+  margin-bottom: 30px;
+}
+
+.external-text .red-button {
+  position: absolute;
+  bottom: 0;
+  right: 0; /* ← YES, højre side */
+  width: 150px;
+  height: 50px;
+  background-color: var(--color-red);
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.external-text .red-button:hover {
+  background-color: #a61b14;
+  transform: scale(1.03);
+}
+
+/* SERVICE INTERNAL COMMUNICATION SECTION */
+.internal-section {
+  background-color: #F7F7F7;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 55px;
+  padding: 75px 75px;
+  flex-wrap: wrap;
+}
+
+.internal-text {
+  max-width: 500px;
+  padding-right: 100px; /* padding for tekst */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  padding-bottom: 80px;
+}
+
+.internal-text h2 {
+  font-size: var(--font-size-xlarge);
+  font-family: var(--font-primary);
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.internal-text p {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+  white-space: pre-line;
+  margin-bottom: 30px;
+}
+
+.internal-text .red-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 150px;
+  height: 50px;
+  background-color: var(--color-red);
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.internal-image img {
+  width: 600px;
+  height: 825px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* SERVICE - QUEUEING SYSTEM SECTION */
+.queueing-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 75px 75px 15px;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.queueing-images {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-right: 50px; 
+}
+
+.queueing-images img {
+  width: 600px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.queueing-text {
+  position: relative;
+  width:500px;
+  padding-bottom: 115px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.queueing-text h2 {
+  font-size: var(--font-size-xlarge);
+  font-family: var(--font-primary);
+  margin: 0 0 25px 0;
+}
+
+.queueing-text p {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  line-height: 1.6;
+  white-space: pre-line;
+  margin-bottom: 30px;
+}
+
+/* KNAP – FAST I BUNDEN */
+.queueing-text .red-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 5;
+  width: 150px;
+  height: 50px;
+  background-color: var(--color-red);
+  color: var(--color-white);
+  border-radius: 10px;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  font-weight: 500;
+}
+
+.queueing-text .red-button:hover {
+  background-color: #a61b14;
+  transform: scale(1.03);
+}
+
+.service-spacer-2 {
+  height: 50px;
+}
+
+/* _________________________________________________________________________________________________________________________________________________ */
+/* ABOUT PAGE */
+.about-hero {
+  width: 100%;
+  height: 600px; 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: left;
+}
+
+.about-hero-overlay {
+  text-align: left;
+  color: var(--color-white);
+  max-width: 900px;
+  padding: 0 20px;
+  padding-left: 75px;
+  padding-top: 200px;
+}
+
+.about-hero-overlay h1 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xlarge);
+  margin-bottom: 30px;
+}
+
+.about-hero-overlay p {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+  margin-bottom: 50px;
+  white-space: pre-line; /* gør <br> at virker i ACF */
+}
+
+.hero-button-decor {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+/* OUR STORY */
+.our-story-section {
+  background-color: var(--color-white);
+  padding: 100px 0;
+}
+
+.story-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.story-text {
+  max-width: 600px;
+  flex: 1;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  color: var(--color-grey02);
+}
+
+.story-text h2 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-large);
+  margin-bottom: 25px;
+  color: var(--color-black);
+}
+
+.story-text p {
+  line-height: 1.6;
+  white-space: pre-line; 
+}
+
+.story-image img {
+  width: 500px;
+  height: 550px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.about-spacer-1 {
+  height: 50px;
+}
+
+/* vVALUE SECTION CARDS AND ICONS */
+.values-section {
+  background-color: var(--color-grey01);
+  padding: 100px 0;
+}
+
+.section-header {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-large);
+  color: var(--color-black);
+  margin-bottom: 60px;
+  padding-left: 325px; /* Matcher venstre spacing fra kort */
+  text-align: left; 
+}
+
+.value-cards-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 0 40px;
+}
+
+.value-card {
+  width: 325px;
+  height: 425px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 16px;
+  padding: 30px;
+  text-align: left;
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  position: relative;
+  padding: 30px;
+}
+
+.value-icon {
+  width: 50px;
+  height: 50px;
+  margin: 0 0 20px 0;
+  object-fit: contain;
+}
+
+.value-title {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-medium);
+  color: var(--color-white);
+  margin-bottom: 10px;
+  margin-left: 0;
+}
+
+.value-text {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  color: var(--color-white);
+  line-height: 1.5;
+  white-space: pre-line;
+  margin-left: 0;
+}
+
+/* ABOUT - GOALS SECTION */
+.goals-section {
+  background-color: var(--color-white);
+  padding: 100px 0;
+}
+
+.goals-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  align-items: center;
+  justify-content: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.goals-text {
+  flex: 1;
+  max-width: 600px;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  color: var(--color-grey02);
+}
+
+.goals-text h2 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-large);
+  margin-bottom: 25px;
+  color: var(--color-black);
+}
+
+.goals-text p {
+  line-height: 1.6;
+  white-space: pre-line; /* Gør <br> fra textarea brugbar */
+}
+
+.goals-image img {
+  max-width: 100%;
+  width: 500px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* _________________________________________________________________________________________________________________________ */
+/* SOLO SINGLE BLOG CSS KAOS */
+
+/* HERO SECTION FOR BLOG POST */
+.ka-blog-hero {
+  width: 100%;
+  height: 600px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+
+.ka-blog-hero-overlay {
+  width: 100%;
+  padding-top: 200px;
+  padding-left: 75px;
+}
+
+.ka-blog-hero-inner h1 {
+  font-size: var(--font-size-xlarge);
+  font-family: var(--font-primary);
+  color: var(--color-white);
+  text-align: left;
+  line-height: 1.1;
+}
+
+/* BLOG TEXT SECTION */
+.ka-blog-text-section {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: left;
+  padding: 30px 20px; /* Added spacing */
+}
+
+.ka-blog-text-section p {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  color: var(--color-black);
+  line-height: 1.6;
+}
+
+/* BLOG TEXT + IMAGE ROW SECTION */
+.ka-blog-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  max-width: 850px;
+  margin: 10px auto;
+  flex-wrap: wrap;
+}
+
+.ka-blog-text {
+  flex: 0 0 400px;
+  text-align: left;
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  color: var(--color-black);
+  line-height: 1.6;
+}
+
+.ka-blog-image {
+  flex: 0 0 400px;
+}
+
+.ka-blog-image img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+}
+
+/* FALLBACK STYLING – hvis der IKKE er et billede :D */
+.ka-blog-text-wrapper {
+  max-width: 850px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.ka-blog-text-wrapper p {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  color: var(--color-black);
+  line-height: 1.6;
+}
+
+/* BACK BUTTON SECTION */
+.ka-blog-back-link {
+  max-width: 850px;
+  margin: 60px auto 100px;
+  padding: 0 20px;
+}
+
+.ka-blog-back-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.ka-back-arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ka-back-icon {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+.ka-back-text {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  color: var(--color-black);
+}
+
+/* ____________________________________________________________________________________________________________ */
+/* CASES // WORK CARD STYLING  */
+.card {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+.card * {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+.case-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 50px 250px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.case-card {
+  display: flex;
+  background: var(--color-grey01);
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 900px;
+  align-items: center;
+  gap: 30px;
+}
+
+.card-image img {
+  width: 355px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.card-content {
+  flex: 1;
+}
+
+.card-title {
+  font-size: var(--font-size-medium);
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+.card-text {
+  font-size: var(--font-size-small);
+  color: var(--color-grey02);
+}
+
+.card-icon {
+  margin-left: auto;
+  align-self: flex-end;
+}
+
+
+
+/* ____________________________________________________________________________________________________________ */
+/* SOLO CASE HERO SECTION */
+.case-hero {
+  width: 100%;
+  height: 600px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+}
+
+.case-hero-overlay {
+  width: 100%;
+  padding-top: 200px;
+  padding-left: 75px;
+}
+
+.case-hero-overlay h1 {
+  font-size: var(--font-size-xlarge);
+  font-family: var(--font-primary);
+  color: var(--color-white);
+  text-align: left;
+  line-height: 1.1;
+}
+
+/* CASE CONTENT SECTION */
+.case-content {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Ens tekst-styling */
+.case-text {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  color: var(--color-black);
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* Tekst + billede layout */
+.case-text-image {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.case-text-image .case-text {
+  flex: 0 0 400px;
+  text-align: left;
+}
+
+.case-main-image {
+  flex: 0 0 400px;
+}
+
+.case-main-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+}
+
+/* BACK LINK SECTION */
+.case-back-link {
+  max-width: 850px;
+  margin: 60px auto 100px;
+  padding: 0 20px;
+}
+
+.back-arrow-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.back-icon {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
+.back-text {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  color: var(--color-black);
+}
+
+/* ___________________________________________________________________________________________________________________________________________ */
+/* 404 STYLING */
+/* ILLUSTRATION */
+.error-illustration {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+.error-404-hero {
+  background-color: var(--color-grey01);
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-content {
+  padding-top: 10px;
+  max-width: 700px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+}
+
+/* 404 TITLE*/
+.error-code {
+  font-size: 96px;
+  font-family: var(--font-primary);
+  color: var(--color-red);
+  margin-bottom: 20px;
+}
+
+/* INFO BESKED */
+.error-message {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  color: var(--color-black);
+  margin-bottom: 30px;
+}
+
+/* HOME BUTTON*/
+.error-button {
+  background-color: var(--color-red);
+  font-size: var(--font-size-small);
+  color: var(--color-white);
+  padding: 14px 28px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-family: var(--font-primary);
+  transition: background-color 0.3s ease;
+}
+
+.error-button:hover {
+  background-color: #a71c16;
+}
+
+.error-spacer-1 {
+  height: 25px;
+}
+
+
+/*___________________________________________________________________________________________________________________________________________ */
+/* HERO FOR CASES PAGE */
+
+.work-hero {
+  width: 100%;
+  height: 450px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+}
+
+.work-hero-content {
+  max-width: 850px;
+  padding-left: 75px;
+  padding-right: 20px;
+  width: 100%;
+  padding-top: 100px;
+}
+
+.work-hero-content h1 {
+  font-size: var(--font-size-xlarge);
+  color: var(--color-white);
+  font-family: var(--font-primary);
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.work-hero-textbox {
+  color: var(--color-white);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-small);
+  line-height: 1.6;
+  text-align: left;
+}
+
+/* _________________________________________________________________________________________________________________________________________________________________ */
+.page-wrapper {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+/* ___________________________________________________________________________________________________________________________________________________ */
+/* ___________________________________________________________________________________________________________________________________________________ */
+/* ___________________________________________________________________________________________________________________________________________________ */
+/* _______________________________________________     RESPONSIVE AREA MEGA FIX      _________________________________________________________________ */
+/* ___________________________________________________________________________________________________________________________________________________ */
+/* ___________________________________________________________________________________________________________________________________________________ */
+/* ___________________________________________________________________________________________________________________________________________________ */
+
+/* HEADER STYLES FOR DA PHONE*/
+@media screen and (max-width: 768px) {
+  /* Centrer header-indhold */
+  .header-inner {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo {
+    margin-bottom: 20px;
+  }
+
+  /* Horisontal menu på én linje */
+  .main-menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap; /* ← vigtigt: alt på én linje */
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .main-menu li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .main-menu a {
+    all: unset; /* ← fjerner underline, hover, padding osv. */
+    font-family: var(--font-secondary);
+    font-size: 10px;
+    color: var(--color-white);
+    cursor: pointer;
+  }
+
+  .main-menu .button-contact > a {
+    all: unset; /* Fjern alt styling */
+    font-family: var(--font-secondary);
+    font-size: 10px;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+}
+
+
+/* HOME STYLES FOR DA PHONE*/
+
+  /* Hero section */
+@media screen and (max-width: 768px) {
+  .hero-section {
+    height: 550px;
+    background-position: center;
+  }
+
+  .hero-text-wrapper {
+    position: absolute;
+    top: 150px;
+    left: 30px;
+    right: 30px; /* for at undgå at tekst går helt ud <3 */
+  }
+
+  .hero-title-box h1 {
+    font-size: 32px; 
+    margin-bottom: 25px;
+    line-height: 1.2;
+  }
+
+  .hero-subtext-box {
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 100%;
+  }
+}
+
+  /* Our Service */
+  @media screen and (max-width: 768px) {
+    .home-service-section {
+      padding: 40px 30px;
+    }
+  
+    .home-service-header h2 {
+      font-size: var(--font-size-medium); /* Matcher headertekst !!! */
+    }
+  
+    .home-service-cards {
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+  
+    .service-card-item {
+      width: 100%;
+      height: 200px;
+    }
+  
+    .home-card-title {
+      font-size: 18px;
+    }
+  
+    .home-card-button {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  /* Our Clients */
+  .clients-logos {
+    -ms-overflow-style: none;  /* IE og Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+
+  .clients-logos::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari, Opera */
+  }
+
+  .clients-title {
+    font-family: var(--font-primary);
+    font-size: 32px; /* Tilpas evt. mere */
+    color: var(--color-black);
+    margin-bottom: 75px;
+    text-align: left;
+  }
+
+  /* Highlighted Case*/
+  @media (max-width: 768px) {
+    .case-read-wrapper {
+      flex-direction: column;
+      padding: 0 20px;
+      gap: 25px;
+    }
+  
+    .case-read-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  
+    .case-read-text {
+      max-width: 100%;
+    }
+  
+    .case-read-text h2 {
+      font-size: 32px;
+    }
+  
+    .case-read-text p {
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+  
+    .case-read-link {
+      justify-content: flex-start;
+    }
+  
+    .case-read-arrow-text {
+      font-size: 15px;
+    }
+  
+    .case-read-arrow-img {
+      width: 25px;
+    }
+  
+    .home-button-section {
+      padding: 40px 20px;
+    }
+  
+    .home-button-content {
+      justify-content: flex-start;
+      padding: 0;
+    }
+  
+    .home-button-text {
+      font-size: 15px;
+    }
+  
+    .home-button-image {
+      width: 25px;
+    }
+  }
+  
+ /* SERVICE STYLES FOR DA PHONE*/ 
+
+ @media (max-width: 768px) {
+  /* SERVICE HERO SECTION */
+  .service-hero {
+    height: 450px;
+  }
+
+  .service-hero-overlay {
+    padding: 100px 25px 0 25px;
+  }
+
+  .service-hero-overlay h1 {
+    font-size: 36px;
+  }
+
+  .service-hero-overlay p {
+    font-size: 14px;
+    max-width: 100%;
+  }
+
+    @media (max-width: 768px) {
+      /* SERVICE HERO CARDS */
+      .service-cards-wrapper {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 15px;
+        margin-top: 30px;
+      }
+    
+      .service-card {
+        width: 100%;
+        max-width: 300px; 
+        height: 200px;
+        padding: 18px;
+        border-radius: 10px;
+      }
+    
+      .service-card-title {
+        font-size: 18px;
+      }
+    
+      .service-card-button {
+        width: 16px;
+        height: 16px;
+        margin-top: 20px;
+      }
+    }
+  }
+
+
+  @media (max-width: 768px) {
+    .digital-service-wrapper {
+      flex-direction: column;
+      padding: 0 15px;
+      align-items: center;
+      gap: 25px;
+    }
+  
+    .digital-service-images {
+      padding-right: 0;
+      width: 100%;
+    }
+  
+    .digital-service-images img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+  
+    .digital-service-textarea {
+      padding-bottom: 0;
+      max-width: 100%;
+      text-align: left;
+      position: static;
+    }
+  
+    .digital-service-textarea h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+  
+    .digital-service-textarea p {
+      font-size: var(--font-size-small);
+      margin-bottom: 30px;
+    }
+  
+    .digital-service-textarea .red-button {
+      position: static;
+      margin-top: 10px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .external-section {
+      flex-direction: column;
+      padding: 0 15px 50px;
+      align-items: center;
+      text-align: left;
+    }
+  
+    .external-image {
+      display: none; /* ← skjul billede på mobil */
+    }
+  
+    .external-text {
+      width: 100%;
+      height: auto;
+      padding: 0;
+      margin-top: 0;
+      position: static;
+    }
+  
+    .external-text h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+  
+    .external-text p {
+      font-size: var(--font-size-small);
+      margin-bottom: 30px;
+    }
+  
+    .external-text .red-button {
+      position: static;
+      margin-top: 10px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .internal-section {
+      flex-direction: column;
+      padding: 50px 20px;
+      gap: 30px;
+    }
+  
+    .internal-text {
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      order: 1;
+      padding-bottom: 0;
+    }
+  
+    .internal-text h2 {
+      font-size: 32px;
+    }
+  
+    .internal-text p {
+      font-size: var(--font-size-small);
+      margin-bottom: 20px;
+    }
+  
+    .internal-text .red-button {
+      position: relative;
+      bottom: auto;
+      right: auto;
+      margin-bottom: 30px;
+    }
+  
+    .internal-image {
+      width: 100%;
+      order: 2;
+    }
+  
+    .internal-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .queueing-section {
+      flex-direction: column;
+      padding: 50px 20px;
+      gap: 30px;
+    }
+  
+    .queueing-text {
+      width: 100%;
+      padding: 0;
+      order: 1;
+    }
+  
+    .queueing-text h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+  
+    .queueing-text p {
+      font-size: var(--font-size-small);
+      margin-bottom: 20px;
+    }
+  
+    .queueing-text .red-button {
+      position: relative;
+      bottom: auto;
+      right: auto;
+      margin-bottom: 30px;
+    }
+  
+    .queueing-images {
+      width: 100%;
+      order: 2;
+      gap: 20px;
+      padding: 0;
+    }
+  
+    .queueing-images img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+    }
+  }
+
+/* CASES OVERVIEW PAGE STYLES FOR DA PHONE*/
+
+@media (max-width: 768px) {
+  .case-cards {
+    padding: 40px 20px;
+    align-items: center;
+  }
+
+  .case-card {
+    flex-direction: column;
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  .card-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .card-content {
+    width: 100%;
+    text-align: left;
+  }
+
+  .card-title {
+    font-size: 22px;
+    margin-top: 20px;
+  }
+
+  .card-text {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+
+  .card-icon {
+    margin: 0;
+    align-self: flex-start;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .work-hero {
+    height: 400px;
+    background-position: center;
+  }
+
+  .work-hero-content {
+    padding: 0 20px;
+    padding-top: 150px;
+  }
+
+  .work-hero-content h1 {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .work-hero-textbox {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+}
+
+/* SOLO CASE STYLES FOR DA PHONE  */
+@media (max-width: 768px) {
+  .case-hero {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .case-hero-overlay {
+    padding: 40px 20px;
+    text-align: left;
+  }
+
+  .case-hero-overlay h1 {
+    font-size: 32px;
+    line-height: 1.2;
+    font-family: var(--font-primary);
+    color: var(--color-white);
+    margin: 0;
+  }
+
+  .case-content {
+    padding: 30px 20px;
+  }
+
+  .case-text {
+    font-size: var(--font-size-small);
+    font-family: var(--font-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .case-main-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+
+  .case-back-link {
+    padding: 0 20px 80px;
+  }
+
+  .back-arrow-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .back-icon {
+    width: 25px;
+    height: auto;
+  }
+
+  .back-text {
+    font-size: var(--font-size-small);
+    font-family: var(--font-secondary);
+  }
+}
+
+/* HERO */
+.case-hero {
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+}
+
+.case-hero-overlay {
+  padding: 40px 20px;
+  text-align: left;
+}
+
+.case-hero-overlay h1 {
+  font-size: 32px;
+  line-height: 1.2;
+  font-family: var(--font-primary);
+  color: var(--color-white);
+  margin: 0;
+}
+
+
+/* CONTENT WRAPPER */
+.case-content {
+  padding: 30px 20px;
+}
+
+/* TEXT STYKKE 1 + 3 */
+.case-text {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  line-height: 1.6;
+  margin-bottom: 25px;
+  color: var(--color-black);
+}
+
+/* TEXT STYKKE 2 + BILLEDE */
+.case-text-image {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.case-main-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+
+/* BACK LINK SECTION */
+.case-back-link {
+  padding: 40px 20px 80px;
+}
+
+.back-arrow-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.back-icon {
+  width: 25px;
+  height: auto;
+}
+
+.back-text {
+  font-size: var(--font-size-small);
+  font-family: var(--font-secondary);
+  color: var(--color-black);
+}
+
+/* ABOUT STYLES FOR DA PHONE */
+@media (max-width: 768px) {
+
+  .about-hero {
+    height: auto;
+    padding: 100px 0 50px;
+    display: block;
+    background-position: center;
+  }
+
+  .about-hero-overlay {
+    padding: 0 20px;
+    padding-top: 150px;
+    text-align: left;
+  }
+
+  .about-hero-overlay h1 {
+    font-size: 32px;
+  }
+
+  .about-hero-overlay p {
+    font-size: var(--font-size-small);
+  }
+
+  .our-story-section {
+    padding: 60px 0;
+  }
+
+  .story-container {
+    flex-direction: column;
+    gap: 40px;
+    padding: 0 20px;
+  }
+
+  .story-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .story-text {
+    text-align: left;
+    font-size: var(--font-size-small);
+  }
+
+  .story-text h2 {
+    font-size: 32px;
+  }
+
+  .values-section {
+    padding: 60px 0;
+  }
+
+  .section-header {
+    font-size: 32px;
+    padding-left: 20px;
+    text-align: left;
+  }
+
+  .value-cards-wrapper {
+    padding: 0 20px;
+    gap: 30px;
+  }
+
+  .value-card {
+    width: 100%;
+    height: auto;
+    padding: 25px;
+  }
+
+  .value-title {
+    font-size: var(--font-size-medium);
+  }
+
+  .value-text {
+    font-size: var(--font-size-small);
+  }
+
+  .goals-section {
+    padding: 60px 0;
+  }
+
+  .goals-container {
+    flex-direction: column;
+    padding: 0 20px;
+    gap: 40px;
+  }
+
+  .goals-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .goals-text h2 {
+    font-size: 32px;
+  }
+
+}
+
+
+/* BLOG STYLES FOR DA PHONE */
+@media screen and (max-width: 768px) {
+  .blog-hero {
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+  }
+
+  .blog-hero-content {
+    width: 100%;
+    padding: 0 20px 40px; /* mindre padding på siderne */
+    margin: 0 auto;
+    max-width: 90%; /* begrænser hvor bred tekstboksen bliver */
+  }
+
+  .blog-hero-content h1 {
+    font-size: 32px;
+    color: var(--color-white);
+    font-family: var(--font-primary);
+    margin-bottom: 15px;
+    text-align: left;
+  }
+
+  .blog-hero-textbox {
+    font-size: var(--font-size-small);
+    color: var(--color-white);
+    font-family: var(--font-secondary);
+    line-height: 1.6;
+    max-width: 100%;
+    word-break: break-word;
+  }
+}
+
+/* SOLO BLOG STYLE FOR DA PHONE */
+@media screen and (max-width: 768px) {
+  .ka-blog-hero {
+    height: auto;
+    padding-top: 100px;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .ka-blog-hero-overlay {
+    padding: 40px 30px 30px;
+  }
+
+  .ka-blog-hero-inner h1 {
+    font-size: 32px;
+    color: var(--color-white);
+    line-height: 1.2;
+    text-align: left;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* TEKSTSEKTION – ENKELTSTÅENDE PARAGRAF */
+  .ka-blog-text-section {
+    padding: 30px 20px;
+    max-width: 100%;
+  }
+
+  .ka-blog-text-section p {
+    font-size: var(--font-size-small);
+    line-height: 1.6;
+  }
+
+  /* TEKST + BILLEDE SIDE-OM-SIDE BLIVER STABLET */
+  .ka-blog-row {
+    flex-direction: column;
+    gap: 30px;
+    padding: 0 20px;
+    max-width: 100%;
+  }
+
+  .ka-blog-text,
+  .ka-blog-image {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .ka-blog-text {
+    font-size: var(--font-size-small);
+    line-height: 1.6;
+  }
+
+  .ka-blog-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+}
+
+/* CONTACT STYLE FOR DA PHONE <3 */
+@media screen and (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
+  .contact-hero {
+    height: 350px;
+    background-position: center;
+  }
+
+  .contact-hero-overlay {
+    padding: 160px 25px 0;
+  }
+
+  .contact-hero-overlay h1 {
+    font-size: 32px;
+  }
+
+  .contact-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 0 25px;
+    margin-top: -80px;
+  }
+
+  .contact-form {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .contact-form input[type="submit"] {
+    width: 100px;
+    margin-top: 40px;
+    margin-bottom: 0;
+  }
+
+  .contact-info-box {
+    width: 100%;
+    max-width: 325px;
+    padding: 30px;
+  }
+
+  .map-section {
+    height: 400px;
+    background-position: center;
+  }
+
+  .contact-spacer-3 {
+    height: 50px;
+  }
+}
+
+/* FOOTER FOR PHONE */
+@media screen and (max-width: 768px) {
+  .site-footer {
+    padding: 50px 30px;
+    text-align: left;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .footer-logo img {
+    max-width: 180px;
+    margin-bottom: 50px;
+  }
+
+  .footer-spacer {
+    display: none;
+  }
+
+  .footer-columns {
+    flex-direction: column;
+    gap: 30px;
+    display: none;
+  }
+
+  .footer-column {
+    width: 100%;
+  }
+
+  .footer-social-icons img {
+    width: 26px;
+  }
+
+  .copyright-text {
+    font-size: var(--font-size-small);
+    margin-top: 30px;
+  }
+}
